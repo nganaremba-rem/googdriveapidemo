@@ -36,7 +36,9 @@ const auth = new google.auth.GoogleAuth({
 		type: process.env.type,
 		project_id: process.env.project_id,
 		private_key_id: process.env.private_key_id,
-		private_key: process.env.private_key.replace(/\\n/g, "\n"),
+		private_key: process.env.private_key
+			.replace(/\\n/g, "\n")
+			.replace(/"/g, ""),
 		client_email: process.env.client_email,
 		client_id: process.env.client_id,
 		universe_domain: process.env.universe_domain,
