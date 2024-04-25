@@ -1,6 +1,5 @@
 import path from "node:path";
 import stream from "node:stream";
-import url from "node:url";
 import express from "express";
 import { google } from "googleapis";
 import multer from "multer";
@@ -8,9 +7,6 @@ import multer from "multer";
 const app = express();
 
 const PORT = process.env.PORT || 8000;
-
-// const __filename = url.pathToFileURL(import.meta.url).pathname;
-// const __dirname = path.dirname(__filename);
 
 // Multer SETUP
 
@@ -32,12 +28,9 @@ const storage = multer.diskStorage({
 
 const upload = multer();
 
-console.log(process.env);
-
 // Google drive setup
 const scopes = ["https://www.googleapis.com/auth/drive"];
 const auth = new google.auth.GoogleAuth({
-	// keyFile: path.resolve("./credentials.json"),
 	scopes,
 	credentials: {
 		type: process.env.type,
@@ -80,9 +73,7 @@ app.post("/uploadImage", upload.single("profile"), async (req, res) => {
 			fields: "id,name",
 		});
 
-	console.log(data);
-
-	res.send("Upload Success");
+	res.send(`Image Link: https://drive.google.com/uc?id=${data.id}`);
 });
 
 app.listen(PORT, () => {
