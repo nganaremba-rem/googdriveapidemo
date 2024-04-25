@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env index",
+    "start": "node index",
     "dev": "node --watch --env-file=.env index"
   },
   "keywords": [],
